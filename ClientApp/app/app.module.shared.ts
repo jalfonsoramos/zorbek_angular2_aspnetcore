@@ -4,9 +4,9 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
-import { HelloworldComponent } from './components/helloworld/helloworld.component';
+import { UserComponent } from './components/user/user.component'
+import { UserViewComponent } from './components/user/user-view.component';
+import { UserGridComponent } from './components/user/user-grid.component';
 import { UserService } from './services/user.service';
 
 export const sharedConfig: NgModule = {
@@ -14,18 +14,17 @@ export const sharedConfig: NgModule = {
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
         HomeComponent,
-        HelloworldComponent        
+        UserComponent,
+        UserViewComponent,
+        UserGridComponent
     ],
     providers:[UserService],
     imports: [
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'user', component:UserComponent},
             { path: '**', redirectTo: 'home' }
         ])
     ]

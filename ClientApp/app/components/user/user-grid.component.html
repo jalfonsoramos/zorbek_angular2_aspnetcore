@@ -1,0 +1,22 @@
+<ng-container *ngIf="users">
+    <div class="datagrid">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Date of birth</th>
+            </tr>
+            <ng-container *ngFor="let user of users">
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.address }}</td>
+                    <td>{{ user.dob | date: 'MM/dd/yyyy' }}</td>
+                </tr>
+            </ng-container>
+        </table>
+    </div>
+</ng-container>
