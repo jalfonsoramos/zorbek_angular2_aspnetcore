@@ -1,26 +1,23 @@
 import { Injectable } from '@angular/core';
 
 export class User{
-    constructor(public id:number, public firstName: string, public lastName:string, public address:string){}
+    constructor(public id:number, public firstName: string, public lastName:string, 
+        public address:string, public dob:Date){}
 }
 
 @Injectable()
 export class UserService{
     users: User[]= [
-        new User(1,'Memo','Herrera','Ensenada'),
-        new User(1,'Alfonso','Paredes','Tijuana'),
-        new User(1,'Andres','Wong','Tijuana')];
+        new User(1,'Memo','Herrera','Ensenada',new Date('08/01/1992')),
+        new User(2,'Alfonso','Paredes','Tijuana',new Date('02/15/1974')),
+        new User(3,'Andres','Wong','Tijuana',new Date('01/15/1995'))];
 
     getUser(id:number){
-        var user = null;
-
-        for(var i=0;i<this.users.length;i++){
-            if(id == this.users[i].id){
-               user = this.users[i];
-               break;
-            }
-        }
-
+        var user = this.users.find(x => x.id == id);
         return user;
+    }
+
+    getUsers(){
+        return this.users;
     }
 }
