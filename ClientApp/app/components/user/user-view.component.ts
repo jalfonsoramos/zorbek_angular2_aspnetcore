@@ -8,12 +8,12 @@ import { User, UserService } from '../../services/user.service';
         providers: [UserService]
     })
 export class UserViewComponent {
-    public user: User;
+    public user: User | undefined;
 
     constructor(private userService: UserService) {
     }
 
-    getUser(id) {
-        this.user = this.userService.getUser(id);
+    getUser(id:number) {
+        this.user = this.userService.getUser(id);       
     }
 }
