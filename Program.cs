@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace zorbek_angular2_aspnetcore
 {
-   public class Program
+  public class Program
     {
         public static void Main(string[] args)
         {
