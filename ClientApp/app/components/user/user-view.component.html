@@ -4,14 +4,14 @@
 <br><br>
 <div *ngIf=user class="panel panel-info">
     <div class="panel-heading">
-        {{ user.firstName }} {{ user.lastName }}
+        {{ (user?.firstName) || '' }} {{ user?.lastName }}
     </div>
     <div class="panel-body">
         <ul>
             <li>
-                Address: {{ user.address }} </li>
+                Address: {{ user?.address }} </li>
             <li>
-                Date of Birth: {{ user.dob | date: 'MM/dd/yyyy' }}</li>
+                Date of Birth: {{ user?.dob | date: 'MM/dd/yyyy' }}</li>
         </ul>
     </div>
 </div>

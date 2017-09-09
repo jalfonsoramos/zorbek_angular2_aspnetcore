@@ -4,7 +4,7 @@ import { User, UserService } from '../../services/user.service';
 @Component(
     {
         selector: 'user-view',
-        template: require('./user-view.component.html'),
+        templateUrl: './user-view.component.html',
         providers: [UserService]
     })
 export class UserViewComponent {

@@ -1,0 +1,27 @@
+<h4>Edit User</h4>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        Edit User
+    </div>
+    <div class="panel-body">
+        <div>
+            <label for="update">Edit</label>
+            <input id="update" type="radio" name="option" value="update" [(ngModel)]="editoption" (ngModelChange)="onEditOption()">
+            <label for="add">Add</label>
+            <input id="add" type="radio" name="option" value="add" [(ngModel)]="editoption" (ngModelChange)="onEditOption()">
+        </div>
+        <div>
+            <div *ngIf="editoption == 'update'">
+                <input type="text" #searchInput>
+                <button type="submit" (click)='getUser(searchInput.value)'>Search</button>
+            </div>
+            <div *ngIf="(editoption == 'update' && user) || (editoption=='add')">
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" [ngModel]="user?.firstName" (ngModelChange)="user.firstName=$event"><br>
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" [ngModel]="user?.lastName" (ngModelChange)="user.lastName=$event"><br><br>
+                <button *ngIf="user?.firstName!='' && user?.lastName!=''"  type="submit" (click)='saveUser()'>Save</button>
+            </div>
+        </div>
+    </div>
+</div>
