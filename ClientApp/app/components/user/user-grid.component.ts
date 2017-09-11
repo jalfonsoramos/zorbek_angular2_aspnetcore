@@ -14,9 +14,6 @@ export class UserGridComponent {
     public users: User[];
 
     constructor(private userService: UserService) {
-    }
-
-    getUsers() {
         this.users = this.userService.getUsers();
     }
 }

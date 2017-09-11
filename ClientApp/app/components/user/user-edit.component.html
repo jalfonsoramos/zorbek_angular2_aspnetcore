@@ -3,25 +3,27 @@
     <div class="panel-heading">
         Edit User
     </div>
-    <div class="panel-body">
-        <div>
-            <label for="update">Edit</label>
-            <input id="update" type="radio" name="option" value="update" [(ngModel)]="editoption" (ngModelChange)="onEditOption()">
-            <label for="add">Add</label>
-            <input id="add" type="radio" name="option" value="add" [(ngModel)]="editoption" (ngModelChange)="onEditOption()">
-        </div>
-        <div>
-            <div *ngIf="editoption == 'update'">
-                <input type="text" #searchInput>
-                <button type="submit" (click)='getUser(searchInput.value)'>Search</button>
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+        <div class="panel-body">
+            <div>
+                <label for="add">Add</label>
+                <input id="add" type="radio" name="option" value="1" [(ngModel)]="editMode">
+                <label for="update">Edit</label>
+                <input id="update" type="radio" name="option" value="2" [(ngModel)]="editMode">
             </div>
-            <div *ngIf="(editoption == 'update' && user) || (editoption=='add')">
-                <label for="firstName">First Name</label>
-                <input id="firstName" type="text" [ngModel]="user?.firstName" (ngModelChange)="user.firstName=$event"><br>
-                <label for="lastName">Last Name</label>
-                <input id="lastName" type="text" [ngModel]="user?.lastName" (ngModelChange)="user.lastName=$event"><br><br>
-                <button *ngIf="user?.firstName!='' && user?.lastName!=''"  type="submit" (click)='saveUser()'>Save</button>
+            <div>
+                <div *ngIf="editMode == 2">
+                    <input type="text" #searchInput>
+                    <button type="button" class="btn btn-default" (click)='newUser();getUser(searchInput.value)'>Search</button>
+                </div>
+                <div *ngIf="editMode">
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" name="firstName" type="text" [(ngModel)]="model.firstName" required><br>
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" name="lastName'" type="text" [(ngModel)]="model.lastName" required><br>
+                </div>
             </div>
+            <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
         </div>
-    </div>
+    </form>
 </div>

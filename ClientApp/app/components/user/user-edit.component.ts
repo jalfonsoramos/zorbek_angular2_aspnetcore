@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { User, UserService } from '../../services/user.service';
 
+export enum editModeEnum {
+    add = 1, update = 2
+}
+
 @Component(
     {
         selector: 'user-edit',
@@ -8,32 +12,44 @@ import { User, UserService } from '../../services/user.service';
         providers: [UserService],
     })
 export class UserEditComponent {
-    public user: User | null | undefined;
-    public editoption: string;
+    public model: User | null = this.newUser();
+    public editMode: editModeEnum;
 
     constructor(private userService: UserService) {
-        this.user = null;
     }
 
     getUser(id: number) {
-        this.user = this.userService.getUser(id);
+        var user = this.userService.getUser(id);
+
+        if (user && this.model) {
+            this.model.id = user.id;
+            this.model.firstName = user.firstName;
+            this.model.lastName = user.lastName;
+            this.model.address = user.address;
+            this.model.dob = user.dob;
+        }
     }
 
-    saveUser() {
-        if (this.user) {
-            if (this.user.id > 0) {
-                console.log('update');
+    onSubmit() {
+        if (this.model && this.editMode) {
+            if (this.editMode == editModeEnum.add) {
+                if (this.model.id == 0) {
+                    this.userService.addUser(new User(0,this.model.firstName,this.model.lastName,'',new Date()));
+                    this.model = this.newUser();
+                    return;
+                }
             }
-            else {
-                console.log('add');
+            if(this.editMode == editModeEnum.update){
+                if(this.model.id>0){
+                    this.userService.updateUser(new User(this.model.id, this.model.firstName,this.model.lastName,this.model.address,this.model.dob));
+                    this.model = this.newUser();
+                    return;
+                }
             }
         }
     }
 
-    onEditOption(val: string) {
-        if (val == 'update')
-            this.user = null;
-        else
-            this.user = new User(0, '', '', '', new Date());
+    newUser() {
+        return new User(0, '', '', '', new Date());
     }
 }
